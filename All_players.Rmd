@@ -1,0 +1,76 @@
+---
+title: "Glastonbury, 12/22/22"
+author: ""
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(readxl)
+library(tidyverse)
+library(gt)
+library(cowplot)
+```
+
+```{r data manip, include=FALSE}
+bb_players23 <- read_xlsx("BB_players23.xlsx")
+bb_players23$`eFG%` <-as.numeric(bb_players23$`eFG%`)
+bb_players23$`TO%` <-as.numeric(bb_players23$`TO%`)
+
+athletes <- c("Chad Rizzo", "DJ Hawkins", "Excel Adekola",
+              "Kit Scudder", "Nicholas Bergin", "Jahkai Veal", 
+              "Caleb Smith")
+
+max <- max(bb_players23$Game, na.rm = T)
+
+bb_seven_players <- bb_players23 %>% filter(Athletes %in% athletes)
+
+```
+
+```{r, echo=FALSE}
+eFG <- bb_seven_players %>% filter(Game == max) %>% 
+  ggplot(aes(x = reorder(Athletes, `eFG%`), 
+             y = `eFG%`)) + 
+  geom_col() + 
+  coord_flip() +
+  theme_light()+
+  labs(title = "Glastonbury - eFG%",
+       subtitle = "Dec 22, 2022",
+       x = "",
+       legend = "")
+
+TO <- bb_seven_players %>% filter(Game == max) %>%
+  ggplot(aes(x = reorder(Athletes, -`TO%`), y = `TO%`)) +
+  geom_col() + 
+  coord_flip()+
+  theme_light()+
+  labs(title = "Glastonbury - TO%",
+       subtitle = "Dec 22, 2022",
+       x = "",
+       legend = "")
+  
+
+FTF <- bb_seven_players %>% filter(Game == max) %>% 
+  ggplot(aes(x = reorder(Athletes, FTF), y = FTF)) + 
+  geom_col() + 
+  coord_flip() +
+  theme_light()+
+  labs(title = "Glastonbury - FTF",
+       subtitle = "Dec 22, 2022",
+       x = "",
+       legend = "")
+
+VPS <- bb_seven_players %>% filter(Game == max) %>% 
+  ggplot(aes(x = reorder(Athletes, VPS), y = VPS)) + 
+  geom_col() + 
+  coord_flip() +
+  theme_light()+
+  labs(title = "Glastonbury - VPS",
+       subtitle = "Dec 22, 2022",
+       x = "",
+       legend = "")
+
+plot_grid(eFG, TO, FTF, VPS)
+```
+

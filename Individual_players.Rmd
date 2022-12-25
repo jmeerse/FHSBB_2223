@@ -1,0 +1,137 @@
+---
+title: "Player Graphs"
+author: ""
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(readxl)
+library(tidyverse)
+library(gt)
+library(cowplot)
+library(ggrepel)
+library(gtExtras)
+library(svglite)
+
+bb_players23 <- read_xlsx("BB_players23.xlsx")
+bb_players23$`eFG%` <-as.numeric(bb_players23$`eFG%`)
+bb_players23$`TO%` <-as.numeric(bb_players23$`TO%`)
+
+athletes <- c("Chad Rizzo", "DJ Hawkins", "Excel Adekola",
+              "Kit Scudder", "Nicholas Bergin", "Jahkai Veal", 
+              "Caleb Smith")
+
+bb_seven_players <- bb_players23 %>% filter(Athletes %in% athletes)
+
+#wide to long
+bb_sevenplayers23_long <- gather(bb_seven_players, stat, value, `eFG%`:VPS, factor_key=TRUE)
+```
+
+```{r Individual Players, echo=FALSE, warning=FALSE, message=FALSE, fig.dim=c(8, 6.75)}
+
+meFG <- max(bb_seven_players$`eFG%`)
+mTO <- max(bb_seven_players$`TO%`)
+mFTF <- max(bb_seven_players$FTF)
+mVPS <- max(bb_seven_players$VPS)
+
+for (i in athletes) {
+eFGp <- bb_sevenplayers23_long %>% 
+  filter(Athletes == i, stat == "eFG%") %>% 
+  ggplot(aes(x = Game, y = value)) + 
+  geom_line() + 
+  geom_point() +
+  geom_text_repel(aes(label = value))  +
+  scale_y_continuous(limits = c(-0.01, meFG + 0.05)) +
+  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+                     expand = expansion(mult = 0.05)) + #change after game 10
+  labs(y = "eFG%")
+
+TOp <- bb_sevenplayers23_long %>% 
+  filter(Athletes == i, stat == "TO%") %>% 
+  ggplot(aes(x = Game, y = value)) + 
+  geom_line() + 
+  geom_point() +
+  geom_text_repel(aes(label = value)) +
+  scale_y_continuous(limits = c(-0.01, mTO + 0.05)) +
+  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+                     expand = expansion(mult = 0.05)) + #change after game 10
+  labs(y = "TO%")
+
+FTFp <- bb_sevenplayers23_long %>% 
+  filter(Athletes == i, stat == "FTF") %>% 
+  ggplot(aes(x = Game, y = value)) + 
+  geom_line() + 
+  geom_point() +
+  geom_text_repel(aes(label = value))  +
+  scale_y_continuous(limits = c(-0.01, mFTF + 0.1)) +
+  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+                     expand = expansion(mult = 0.05)) + #change after game 10
+  labs(y = "FTF")
+
+VPSp <- bb_sevenplayers23_long %>% 
+  filter(Athletes == i, stat == "VPS") %>% 
+  ggplot(aes(x = Game, y = value)) + 
+  geom_line() + 
+  geom_point() +
+  geom_text_repel(aes(label = value))  +
+  scale_y_continuous(limits = c(0, mVPS + 0.1)) +
+  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+                     expand = expansion(mult = 0.05)) + #change after game 10
+  labs(y = "VPS")
+  
+ 
+title <- ggdraw() + 
+  draw_label(
+    paste0(i),
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 7)
+  )  
+
+plot <- plot_grid(eFGp, TOp, FTFp, VPSp)
+
+pg <- plot_grid(
+  title, plot,
+  ncol = 1,
+  # rel_heights values control vertical title margins
+  rel_heights = c(0.1, 1)
+)
+
+print(pg)
+
+ggsave(file=paste0("plot-", i, ".png"), w = 6, h = 6.75, units = "in")
+}
+
+
+  
+
+
+```
+
+```{r, echo=FALSE,warning=FALSE, message=FALSE}
+
+
+trend <- bb_sevenplayers23_long %>% group_by(Athletes, stat) %>% summarise(trend = list(value)) %>% ungroup()
+
+table_players <- bb_sevenplayers23_long %>% 
+  select(-2, -3) %>% 
+  pivot_wider(names_from = Opponent, values_from = value) %>% 
+  left_join(trend, by = c("Athletes" = "Athletes", "stat" = "stat"))
+
+table_players %>%   
+  group_by(Athletes) %>% 
+  gt() %>% 
+  gt_theme_nytimes() %>% 
+  gt_plt_sparkline(column = trend) %>% 
+  tab_header("Game by Game Stats")
+
+
+```
+
