@@ -1,5 +1,5 @@
 ---
-title: "AOS, 12/26/22"
+title: "Granby, 12/30/22"
 author: ""
 date: "`r Sys.Date()`"
 output: html_document
@@ -35,8 +35,8 @@ eFG <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Glastonbury - eFG%",
-       subtitle = "Dec 22, 2022",
+  labs(title = "Granby - eFG%",
+       subtitle = "Dec 30, 2022",
        x = "",
        legend = "")
 
@@ -45,8 +45,8 @@ TO <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip()+
   theme_light()+
-  labs(title = "Glastonbury - TO%",
-       subtitle = "Dec 22, 2022",
+  labs(title = "Granby - TO%",
+       subtitle = "Dec 30, 2022",
        x = "",
        legend = "")
   
@@ -56,8 +56,8 @@ FTF <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Glastonbury - FTF",
-       subtitle = "Dec 22, 2022",
+  labs(title = "Granby - FTF",
+       subtitle = "Dec 30, 2022",
        x = "",
        legend = "")
 
@@ -66,8 +66,8 @@ VPS <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Glastonbury - VPS",
-       subtitle = "Dec 22, 2022",
+  labs(title = "Granby - VPS",
+       subtitle = "Dec 30, 2022",
        x = "",
        legend = "")
 
