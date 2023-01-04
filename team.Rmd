@@ -1,7 +1,7 @@
 ---
 title: "FHS Team Stats by Game"
-author: "Through 1/2/23"
-date: "`r Sys.Date()`"
+author: ""
+date: "through `r Sys.Date()`"
 output: html_document
 ---
 

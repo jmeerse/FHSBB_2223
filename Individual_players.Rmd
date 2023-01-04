@@ -118,7 +118,10 @@ ggsave(file=paste0("plot-", i, ".png"), w = 6, h = 6.75, units = "in")
 ```{r, echo=FALSE,warning=FALSE, message=FALSE}
 
 
-trend <- bb_sevenplayers23_long %>% group_by(Athletes, stat) %>% summarise(trend = list(value)) %>% ungroup()
+trend <- bb_sevenplayers23_long %>% 
+  group_by(Athletes, stat) %>% 
+  summarise(trend = list(value)) %>% 
+  ungroup()
 
 table_players <- bb_sevenplayers23_long %>% 
   select(-2, -3) %>% 
