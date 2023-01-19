@@ -44,7 +44,7 @@ eFGp <- bb_sevenplayers23_long %>%
   geom_point() +
   geom_text_repel(aes(label = value))  +
   scale_y_continuous(limits = c(-0.01, meFG + 0.05)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 15, 
                      expand = expansion(mult = 0.05)) + #change after game 10
   labs(y = "eFG%")
 
@@ -55,7 +55,7 @@ TOp <- bb_sevenplayers23_long %>%
   geom_point() +
   geom_text_repel(aes(label = value)) +
   scale_y_continuous(limits = c(-0.01, mTO + 0.05)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 15, 
                      expand = expansion(mult = 0.05)) + #change after game 10
   labs(y = "TO%")
 
@@ -66,7 +66,7 @@ FTFp <- bb_sevenplayers23_long %>%
   geom_point() +
   geom_text_repel(aes(label = value))  +
   scale_y_continuous(limits = c(-0.01, mFTF + 0.1)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 15, 
                      expand = expansion(mult = 0.05)) + #change after game 10
   labs(y = "FTF")
 
@@ -77,7 +77,7 @@ VPSp <- bb_sevenplayers23_long %>%
   geom_point() +
   geom_text_repel(aes(label = value))  +
   scale_y_continuous(limits = c(0, mVPS + 0.1)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 15, 
                      expand = expansion(mult = 0.05)) + #change after game 10
   labs(y = "VPS")
   

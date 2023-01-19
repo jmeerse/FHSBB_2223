@@ -29,7 +29,7 @@ eFG <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `eFG%` )) +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = `eFG%`), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0.25,0.75)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
                      expand = expansion(mult = 0.05)) #change after game 10
 
 TO <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `TO%` )) + 
@@ -37,7 +37,7 @@ TO <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `TO%` )) +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = `TO%`), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0,0.30)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
                      expand = expansion(mult = 0.05))
 
 #OREB <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `OREB%` )) + 
@@ -45,7 +45,7 @@ TO <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `TO%` )) +
 #  geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
 #  geom_text(aes(label = `OREB%`), vjust = 2) +
 #  scale_y_continuous(expand = expansion(mult = 0.1)) +
-#  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+#  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
 #                     expand = expansion(mult = 0.05))
 
 DREB <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `DREB%` )) + 
@@ -53,7 +53,7 @@ DREB <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `DREB%` )) +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = `DREB%`), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0.40,1)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
                      expand = expansion(mult = 0.05))
 
 FTF <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = FTF )) + 
@@ -61,7 +61,7 @@ FTF <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = FTF )) +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = FTF), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0,0.60)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
                      expand = expansion(mult = 0.05))
 
 VPS <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = VPS)) + 
@@ -69,7 +69,7 @@ VPS <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = VPS)) +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = VPS), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0,2)) +
-  scale_x_continuous(limits = c(0, 10), n.breaks = 10, 
+  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
                      expand = expansion(mult = 0.05))
 
 
