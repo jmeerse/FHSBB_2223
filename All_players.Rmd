@@ -1,5 +1,5 @@
 ---
-title: "Newington, 1/17/23"
+title: "Wethersfield, 1/19/23"
 author: ""
 date: "`r Sys.Date()`"
 output: html_document
@@ -35,8 +35,8 @@ eFG <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Newington - eFG%",
-       subtitle = "Jan 17, 2023",
+  labs(title = "Wethersfield - eFG%",
+       subtitle = "Jan 19, 2023",
        x = "",
        legend = "")
 
@@ -45,8 +45,8 @@ TO <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip()+
   theme_light()+
-  labs(title = "Newington - TO%",
-       subtitle = "Jan 17, 2023",
+  labs(title = "Wethersfield - TO%",
+       subtitle = "Jan 19, 2023",
        x = "",
        legend = "")
   
@@ -56,8 +56,8 @@ FTF <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Newington - FTF",
-       subtitle = "Jan 17, 2023",
+  labs(title = "Wethersfield - FTF",
+       subtitle = "Jan 19, 2023",
        x = "",
        legend = "")
 
@@ -66,8 +66,8 @@ VPS <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Newington - VPS",
-       subtitle = "Jan 17, 2023",
+  labs(title = "Wethersfield - VPS",
+       subtitle = "Jan 19, 2023",
        x = "",
        legend = "")
 
