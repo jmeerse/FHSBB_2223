@@ -15,9 +15,11 @@ library(ggrepel)
 library(gtExtras)
 library(svglite)
 
+bb23 <- read_xlsx("BB_team23.xlsx")
 bb_players23 <- read_xlsx("BB_players23.xlsx")
 bb_players23$`eFG%` <-as.numeric(bb_players23$`eFG%`)
 bb_players23$`TO%` <-as.numeric(bb_players23$`TO%`)
+max <- max(bb23$game, na.rm = T)
 
 athletes <- c("Chad Rizzo", "DJ Hawkins", "Excel Adekola",
               "Kit Scudder", "Nicholas Bergin", "Jahkai Veal", 
@@ -44,8 +46,13 @@ eFGp <- bb_sevenplayers23_long %>%
   geom_point() +
   geom_text_repel(aes(label = value))  +
   scale_y_continuous(limits = c(-0.01, meFG + 0.05)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 15, 
-                     expand = expansion(mult = 0.05)) + #change after game 10
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0)) + 
+  labs(x = "") + #change after game 10
   labs(y = "eFG%")
 
 TOp <- bb_sevenplayers23_long %>% 
@@ -55,8 +62,13 @@ TOp <- bb_sevenplayers23_long %>%
   geom_point() +
   geom_text_repel(aes(label = value)) +
   scale_y_continuous(limits = c(-0.01, mTO + 0.05)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 15, 
-                     expand = expansion(mult = 0.05)) + #change after game 10
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0)) + 
+  labs(x = "") + #change after game 10
   labs(y = "TO%")
 
 FTFp <- bb_sevenplayers23_long %>% 
@@ -66,8 +78,13 @@ FTFp <- bb_sevenplayers23_long %>%
   geom_point() +
   geom_text_repel(aes(label = value))  +
   scale_y_continuous(limits = c(-0.01, mFTF + 0.1)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 15, 
-                     expand = expansion(mult = 0.05)) + #change after game 10
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0)) + 
+  labs(x = "") + #change after game 10
   labs(y = "FTF")
 
 VPSp <- bb_sevenplayers23_long %>% 
@@ -77,8 +94,13 @@ VPSp <- bb_sevenplayers23_long %>%
   geom_point() +
   geom_text_repel(aes(label = value))  +
   scale_y_continuous(limits = c(0, mVPS + 0.1)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 15, 
-                     expand = expansion(mult = 0.05)) + #change after game 10
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0)) + 
+  labs(x = "") + #change after game 10
   labs(y = "VPS")
   
  
@@ -106,7 +128,7 @@ pg <- plot_grid(
 
 print(pg)
 
-ggsave(file=paste0("plot-", i, ".png"), w = 6, h = 6.75, units = "in")
+ggsave(file=paste0("plot-", i, ".png"), w = 7, h = 7.75, units = "in")
 }
 
 
@@ -115,7 +137,7 @@ ggsave(file=paste0("plot-", i, ".png"), w = 6, h = 6.75, units = "in")
 
 ```
 
-```{r, echo=FALSE,warning=FALSE, message=FALSE}
+```{r, echo=FALSE,warning=FALSE, message=FALSE, eval=FALSE}
 
 
 trend <- bb_sevenplayers23_long %>% 

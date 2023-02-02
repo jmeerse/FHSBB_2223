@@ -1,11 +1,12 @@
 ---
-title: "FHS Team Stats by Game"
+title: ""
 author: ""
-date: "through `r Sys.Date()`"
+date: "Through `r Sys.Date()`"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 
 library(readxl)
 library(tidyverse)
@@ -16,29 +17,41 @@ library(cowplot)
 ```{r data manip, include=FALSE}
 bb23 <- read_xlsx("BB_team23.xlsx")
 max <- max(bb23$game, na.rm = T)
-
+labels <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m")
+games <- seq(1,max, 1)
 #long to wide
-bb23_long <- gather(bb23[1:(max + 1),], stat, value, `eFG%`:VPS, factor_key=TRUE)
+bb23_long <- gather(bb23[1:max,], stat, value, `eFG%`:VPS, factor_key=TRUE)
 
 ```
 
 
 ```{r, include=FALSE}
-eFG <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `eFG%` )) + 
+eFG <- bb23[1:max, ] %>% ggplot(aes(x = game, y = `eFG%` )) + 
   geom_line() +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = `eFG%`), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0.25,0.75)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
-                     expand = expansion(mult = 0.05)) #change after game 10
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0)) + 
+  labs(x = "")
+  
 
 TO <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `TO%` )) + 
   geom_line() +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = `TO%`), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0,0.30)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
-                     expand = expansion(mult = 0.05))
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0)) + 
+  labs(x = "")
 
 #OREB <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `OREB%` )) + 
 #  geom_line() +
@@ -53,24 +66,39 @@ DREB <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = `DREB%` )) +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = `DREB%`), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0.40,1)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
-                     expand = expansion(mult = 0.05))
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0))+ 
+  labs(x = "")
 
 FTF <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = FTF )) + 
   geom_line() +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = FTF), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0,0.60)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
-                     expand = expansion(mult = 0.05))
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0)) + 
+  labs(x = "")
 
 VPS <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = VPS)) + 
   geom_line() +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = VPS), vjust = 2, size = 3) +
   scale_y_continuous(limits = c(0,2)) +
-  scale_x_continuous(limits = c(0, 15), n.breaks = 10, 
-                     expand = expansion(mult = 0.05))
+  scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
+                     expand = expansion(mult = 0.05), 
+                     labels = bb23$Opponent) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  theme(axis.text.x = element_text(angle=-45, hjust = 0)) + 
+  labs(x = "")
 
 
 title <- ggdraw() + 
@@ -86,17 +114,21 @@ title <- ggdraw() +
     plot.margin = margin(0, 0, 0, 7)
   )
 
-plot <- plot_grid(eFG, TO, DREB,FTF, VPS)
+#plot <- plot_grid(eFG, TO, DREB,FTF, VPS)
 ```
 
-```{r, fig.width = 8, fig.height = 7, echo=FALSE}
-plot_grid(
-  title, plot,
-  ncol = 1,
+```{r, fig.width = 6, fig.height = 4, echo=FALSE}
+#plot_grid(
+#  title, plot,
+#  ncol = 1,
   # rel_heights values control vertical title margins
-  rel_heights = c(0.1, 1.1)
-)
-
+#  rel_heights = c(0.1, 1.1)
+#)
+eFG
+TO
+DREB
+FTF
+VPS
 
 ```
 
