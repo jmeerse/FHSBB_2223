@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Team Stats"
 author: ""
 date: "Through `r Sys.Date()`"
 output: html_document
