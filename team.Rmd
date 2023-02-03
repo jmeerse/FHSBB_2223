@@ -17,8 +17,7 @@ library(cowplot)
 ```{r data manip, include=FALSE}
 bb23 <- read_xlsx("BB_team23.xlsx")
 max <- max(bb23$game, na.rm = T)
-labels <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m")
-games <- seq(1,max, 1)
+
 #long to wide
 bb23_long <- gather(bb23[1:max,], stat, value, `eFG%`:VPS, factor_key=TRUE)
 
