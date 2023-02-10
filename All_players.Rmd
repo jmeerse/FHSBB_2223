@@ -1,5 +1,5 @@
 ---
-title: "Conard, 2/6/23"
+title: "Northwest Catholic, 2/9/23"
 author: ""
 date: ""
 output: html_document
@@ -36,8 +36,8 @@ eFG <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Conard - eFG%",
-       subtitle = "Feb 6, 2023",
+  labs(title = "Northwest Cath - eFG%",
+       subtitle = "Feb 9, 2023",
        x = "",
        legend = "")
 
@@ -46,8 +46,8 @@ TO <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip()+
   theme_light()+
-  labs(title = "Conard - TO%",
-       subtitle = "Feb 6, 2023",
+  labs(title = "Northwest Cath - TO%",
+       subtitle = "Feb 9, 2023",
        x = "",
        legend = "")
   
@@ -57,8 +57,8 @@ FTF <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Conard - FTF",
-       subtitle = "Feb 6, 2023",
+  labs(title = "Northwest Cath - FTF",
+       subtitle = "Feb 9, 2023",
        x = "",
        legend = "")
 
@@ -67,8 +67,8 @@ VPS <- bb_seven_players %>% filter(Game == max) %>%
   geom_col() + 
   coord_flip() +
   theme_light()+
-  labs(title = "Conard - VPS",
-       subtitle = "Feb 6, 2023",
+  labs(title = "Northwest Cath - VPS",
+       subtitle = "Feb 9, 2023",
        x = "",
        legend = "")
 
