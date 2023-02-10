@@ -77,7 +77,7 @@ FTF <- bb23[1:(max + 1), ] %>% ggplot(aes(x = game, y = FTF )) +
   geom_line() +
   geom_point(aes(color = Outcome), size = 3, show.legend = F ) +
   geom_text(aes(label = FTF), vjust = 2, size = 3) +
-  scale_y_continuous(limits = c(0,0.60)) +
+  scale_y_continuous(limits = c(0,0.80)) +
   scale_x_continuous(limits = c(1, max), breaks = bb23$game, 
                      expand = expansion(mult = 0.05), 
                      labels = bb23$Opponent) +
