@@ -128,7 +128,7 @@ pg <- plot_grid(
 
 print(pg)
 
-ggsave(file=paste0("plot-", i, ".png"), w = 7, h = 7.75, units = "in")
+ggsave(file=paste0("plot-", i, ".png"), w = 7.5, h = 7.75, units = "in")
 }
 
 

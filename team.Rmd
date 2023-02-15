@@ -116,7 +116,7 @@ title <- ggdraw() +
 #plot <- plot_grid(eFG, TO, DREB,FTF, VPS)
 ```
 
-```{r, fig.width = 6, fig.height = 4, echo=FALSE}
+```{r, fig.width = 7.5, fig.height = 5, echo=FALSE}
 #plot_grid(
 #  title, plot,
 #  ncol = 1,
